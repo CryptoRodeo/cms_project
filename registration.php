@@ -9,6 +9,8 @@
     <?php
     if(isset($_POST['submit']))
     {
+
+        $message = "Registration Submitted";
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -45,10 +47,11 @@
             {
                 die("QUERY FAILED " . mysqli_error());
             }
+
         }
         else
         {
-            echo "FILL IN ALL FIELDS";
+            $message = "FILL IN ALL FIELDS";
         }
 
         
@@ -67,6 +70,7 @@
                 <div class="form-wrap">
                 <h1>Register</h1>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
+                        <h6><?php echo $message; ?></h6>
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
