@@ -35,6 +35,9 @@
         $db_user_role = $row['user_role'];
     }
 
+    //decrypt password
+    $password = crypt($password, $db_password);
+
     //validation
     if($username === $db_username && $password === $db_password)
     {
