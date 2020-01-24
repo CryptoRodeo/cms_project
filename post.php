@@ -55,6 +55,7 @@
 
 
              <!-- Blog Comments -->
+             
 
              <?php
                 if(isset($_POST['create_comment']))
@@ -63,7 +64,11 @@
                     $comment_author = $_POST['comment_author'];
                     $comment_email = $_POST['comment_email'];
                     $comment_content = $_POST['comment_content'];
-
+                    
+                    /**
+                     * All comment form inputs must be filled
+                     * 
+                     */
                     if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content))
                     {
                         $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
