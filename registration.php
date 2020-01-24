@@ -48,7 +48,7 @@
 
             if(!$register_user_query)
             {
-                die("QUERY FAILED111 " . mysqli_error($connection));
+                die("QUERY FAILED " . mysqli_error($connection));
             }
 
         }

@@ -81,6 +81,7 @@
                                             <td><input class='checkBoxes' type='checkbox' name="checkBoxArray[]" value="<?php echo $id; ?>"></td>
                                             <?php
                                             echo "<td>$id</td>";
+                                            //relate author to post here
                                             echo "<td>$author</td>";
                                             echo "<td>$title</td>";
 
@@ -103,7 +104,7 @@
                                                 echo "<td><a href='../post.php?p_id={$id}'>View</a></td>";
                                                 //url parameters are seperated using the ampersand &
                                                 echo "<td><a href='./posts.php?source=edit_post&p_id={$id}'>Edit</a></td>";
-                                                echo "<td><a href='./posts.php?delete={$id}'>Delete</a></td>";
+                                                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?');\" href='./posts.php?delete={$id}'>Delete</a></td>";
                                             echo "</tr>";
                                     }
                                 ?>
