@@ -34,9 +34,24 @@
         $user_role = $_POST['user_role'];
 
 
+        //Get the salt from the db
+        $query = "SELECT randSalt FROM users";
+        $select_randsalt = mysqli_query($connection, $query);
+        if(!$select_randsalt)
+        {
+            die("Query failed " . mysqli_error());
+        }
+
+        //get the hashed password from db
+        $row = mysqli_fetch_array($select_randsalt);
+        //get salt from db
+        $salt = $row['randSalt'];
+        //hash the password
+        $hashed_password = crypt($user_password, $salt);
+
          $query = "UPDATE users SET ";
          $query .= "username = '{$username}', ";
-         $query .= "user_password = '{$user_password}', ";
+         $query .= "user_password = '{$hashed_password}', ";
          $query .= "user_firstname = '{$user_firstname}', ";
          $query .= "user_lastname = '{$user_lastname}', ";
          $query .= "user_email = '{$user_email}', ";
@@ -95,6 +110,7 @@
 
     <div class="form-group">
         <label for="post_tags">Password</label>
+        <!-- The regular password is returned to the user, but its encrypted when it gets updated -->
         <input type="password" value="<?php echo $user_password; ?>" class="form-control" name="user_password">
     </div>
     

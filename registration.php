@@ -18,9 +18,9 @@
         if(!empty($username) & !empty($email)  & !empty($password) )
         {
             //sanitize inputs
-            echo $username = mysqli_real_escape_string($connection, $username);
-            echo $email = mysqli_real_escape_string($connection, $email);
-            echo $password = mysqli_real_escape_string($connection, $password);
+            $username = mysqli_real_escape_string($connection, $username);
+            $email = mysqli_real_escape_string($connection, $email);
+            $password = mysqli_real_escape_string($connection, $password);
 
             //Get salt from DB for encryption function
             $query = "SELECT randSalt FROM users";
@@ -41,14 +41,14 @@
             $password = crypt($password, $salt);
 
             //register user
-            $query = "INSERT INTO users(username, user_email, user_password, user_role) ";
-            $query .= "VALUES('{$username}','{$email}','{$password}', 'subscriber')";
+            $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
+            $query .= "VALUES('{$username}','{$email}','{$password}','subscriber')";
 
             $register_user_query = mysqli_query($connection, $query);
 
             if(!$register_user_query)
             {
-                die("QUERY FAILED " . mysqli_error());
+                die("QUERY FAILED111 " . mysqli_error($connection));
             }
 
         }
