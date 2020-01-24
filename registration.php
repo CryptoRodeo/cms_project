@@ -37,6 +37,9 @@
             //retrieve salt from db
             $salt = $row['randSalt'];
 
+            //encrypt password
+            $password = crypt($password, $salt);
+
             //register user
             $query = "INSERT INTO users(username, user_email, user_password, user_role) ";
             $query .= "VALUES('{$username}','{$email}','{$password}', 'subscriber')";
@@ -51,10 +54,15 @@
         }
         else
         {
-            $message = "FILL IN ALL FIELDS";
+            $message = "Fields cannot be empty";
         }
 
         
+    }
+    //Submit not set
+    else
+    {
+        $message = "";
     }
 
     ?>
@@ -70,7 +78,7 @@
                 <div class="form-wrap">
                 <h1>Register</h1>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
-                        <h6><?php echo $message; ?></h6>
+                        <h6 class="text-center"><?php echo $message; ?></h6>
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
