@@ -1,0 +1,4 @@
+.pager li a.active_link
+{
+    background: #ddd !important;
+}
