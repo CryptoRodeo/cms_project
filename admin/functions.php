@@ -1,5 +1,62 @@
 <?php 
 
+
+function getUsersOnline()
+    {
+        if(isset($_GET['online_users']))
+        {
+            global $connection;
+
+            //if the connection is not available, due to the way the files are important
+            if(!$connection)
+            {
+                session_start();
+                include('../includes/db.php');
+
+                //catch session
+                $session = session_id();
+                
+                //holds the time measured in seconds
+                $time = time();
+        
+                //amount of time available until the user is marked offline.
+                $time_out_in_seconds = 60; //
+        
+                //The current time minus the time out limit
+                $time_out = $time - $time_out_in_seconds;
+                
+                //select the user in the current session.
+                $query = "SELECT * FROM users_online WHERE session = '{$session}'";
+        
+                $send_query = mysqli_query($connection, $query);
+                
+                //checks to see if there is a user with a session id or if its a new user
+                $count = mysqli_num_rows($send_query);
+        
+                //if a new user is online
+                if($count == null)
+                {
+                    //insert the current user into the table.
+                    mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES ('$session','$time')");
+                }
+                //user is not new, update their time if theyre actively using the site.
+                else
+                {
+                    mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session' ");
+                }
+        
+        
+                //gets all the current users logged in and not timed out. 
+                $users_online = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$time_out' ");
+                echo $online_user_count = mysqli_num_rows($users_online); //what is returned to the GET request
+            }
+         
+        }
+        
+    }
+
+    getUsersOnline();
+
     function confirm_query($query)
     {
         global $connection;

@@ -1,6 +1,7 @@
 </div>
     <!-- /#wrapper -->
 
+    <script src="js/scripts.js"></script>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
@@ -9,7 +10,6 @@
 
     <script src="js/jquery.js"></script>
     <script src="js/toggle_check_boxes.js"></script>
-    <script src="js/scripts.js"></script>
 </body>
 
 </html>
